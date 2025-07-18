@@ -17,8 +17,6 @@ const ramos = {
   "Anatomía en Salud Sexual y Reproductiva": [],
   "Fundamentos de Salud Sexual y Reproductiva": ["Semiología y Patología Femenina Aplicada", "Sexualidad, Salud y Género"],
   "Atención en Matronería Basada en la Evidencia y Tecnología": ["Procedimientos Básicos para la Atención Integral en Matronería"],
-
-  // Solo algunos para mostrar estructura...
 };
 
 const malla = document.getElementById("malla");
