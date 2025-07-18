@@ -1,5 +1,4 @@
 const ramos = {
-  // PRIMER AÑO
   "Cosmovisión Cristiana": ["Antropología Bíblica"],
   "Taller de Habilidades de Aprendizaje I": ["Taller de Habilidades de Aprendizaje II"],
   "Anatomía Humana": ["Fisiología Humana", "Anatomía en Salud Sexual y Reproductiva"],
@@ -19,17 +18,51 @@ const ramos = {
   "Fundamentos de Salud Sexual y Reproductiva": ["Semiología y Patología Femenina Aplicada", "Sexualidad, Salud y Género"],
   "Atención en Matronería Basada en la Evidencia y Tecnología": ["Procedimientos Básicos para la Atención Integral en Matronería"],
 
-  // SEGUNDO AÑO
-  "Ciencia y Religión": ["Enseñanzas de la Biblia"],
-  "Complementario I": ["Complementario II"],
-  "Inglés I": ["Inglés II"],
-  "Fisiopatología Humana": ["Promoción de la Salud"],
-  "Farmacología General": ["Promoción de la Salud", "Preclínico para la Atención Integral en Matronería", "Nutrición y Conducta Alimentaria en Salud Sexual y Reproductiva"],
-  "Microbiología e Inmunología": ["Preclínico para la Atención Integral en Matronería", "Microbiología Aplicada a Salud Sexual y Reproductiva"],
-  "Semiología y Patología Femenina Aplicada": [],
-  "Sexualidad, Salud y Género": [],
-  "Procedimientos Básicos para la Atención Integral en Matronería": ["Estrategias de Manejo del Parto Natural", "Preclínico para la Atención Integral en Matronería"],
+  // Solo algunos para mostrar estructura...
+};
 
-  "Enseñanzas de la Biblia": ["Familia y Sociedad"],
-  "Complementario II"
+const malla = document.getElementById("malla");
+const estados = {};
 
+Object.keys(ramos).forEach(nombre => {
+  estados[nombre] = false;
+
+  const div = document.createElement("div");
+  div.className = "ramo bloqueado";
+  div.textContent = nombre;
+  div.id = nombre;
+  div.onclick = () => aprobar(nombre);
+  malla.appendChild(div);
+});
+
+const iniciales = [
+  "Cosmovisión Cristiana",
+  "Taller de Habilidades de Aprendizaje I",
+  "Anatomía Humana",
+  "Biología Celular",
+  "Química General y Orgánica",
+  "Psicología del Desarrollo para Matronería",
+  "Matronería y Fundamentos Socioculturales de la Salud",
+  "Gestión Básica en Emergencias y Desastres"
+];
+
+iniciales.forEach(nombre => {
+  document.getElementById(nombre).classList.remove("bloqueado");
+});
+
+function aprobar(nombre) {
+  const div = document.getElementById(nombre);
+  if (div.classList.contains("bloqueado")) return;
+
+  if (!estados[nombre]) {
+    div.classList.add("aprobado");
+    estados[nombre] = true;
+
+    ramos[nombre].forEach(dep => {
+      const bloqueado = document.getElementById(dep);
+      if (bloqueado) {
+        bloqueado.classList.remove("bloqueado");
+      }
+    });
+  }
+}
